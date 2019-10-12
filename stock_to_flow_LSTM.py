@@ -101,6 +101,18 @@ X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 predicted_price = model.predict(X_test)
 predicted_price = sc.inverse_transform(predicted_price)
 
+# # Snippet from Nilesh: Rolling prediction using past prediction
+# test_x = dataset['Price'][1500-60:1500].to_numpy().reshape(1,-1)
+# test_x = sc.transform(test_x).reshape(1,-1,1)
+# outputs = []
+
+# for i in range (1500, 2400):
+#     out = model.predict(test_x)
+#     outputs.append(out[0])
+#     test_x = np.concatenate([test_x[0,1:], out]).reshape(1,-1,1)
+    
+# outputs = sc.inverse_transform(outputs)
+
 real_price = dataset.iloc[(int(TRAINING_SIZE*DATASET_SIZE)-LOOKBACK):DATASET_SIZE, 1:2].values
 real_price_lookback = real_price[LOOKBACK:-1 ,:]
 
